@@ -68,7 +68,8 @@ int main(int argc, char** argv) {
 
     int maxy = LINES - DX*2 - 2;
     int maxx = COLS - DX*2 - 2;
-    int c, y, x;
+    int c = 0;
+    int y, x;
 
     for (size_t i = 0; i < filesize; ++i) {
         getyx(textwin, y, x);
