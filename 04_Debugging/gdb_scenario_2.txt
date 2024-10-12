@@ -1,0 +1,10 @@
+set pagination off
+b range.c:62 if I.start + I.step * 27 <= I.cur && I.cur <= I.start + I.step * 34
+
+command 1
+	printf "@@@ %d %d %d %d\n", I.start, I.stop, I.step, I.cur
+	continue
+end
+
+run -100 100 3 > /dev/null
+quit
