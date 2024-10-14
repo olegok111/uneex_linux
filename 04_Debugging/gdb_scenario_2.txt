@@ -1,8 +1,15 @@
 set pagination off
-b range.c:62 if I.start + I.step * 27 <= I.cur && I.cur <= I.start + I.step * 34
+
+set var $seq_i = 1
+b range.c:62 if 28 <= $seq_i && $seq_i <= 35
+b range.c:62
 
 command 1
 	printf "@@@ %d %d %d %d\n", I.start, I.stop, I.step, I.cur
+end
+
+command 2
+	set $seq_i = $seq_i + 1
 	continue
 end
 
