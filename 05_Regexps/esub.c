@@ -3,6 +3,7 @@
 #include <regex.h>
 
 #define MAXGR 10
+#define ERRBUF_LEN 100
 // #define DBG
 
 void print_bag(char *buf, regmatch_t *bags, int bagi) {
@@ -10,15 +11,6 @@ void print_bag(char *buf, regmatch_t *bags, int bagi) {
 }
 
 int main(int argc, char *argv[]) {
-    char *buf = argv[3];
-    int input_len = strlen(argv[3]);
-    char *regex_string = argv[1];
-    char *subst = argv[2];
-    int subst_len = strlen(subst);
-    regex_t regex;
-    regmatch_t bags[MAXGR];
-    int re_errcode;
-
     if (argc != 4) {
         printf(
 "Usage: esub REGEXP SUBSTITUTION STRING\n" \
@@ -28,6 +20,16 @@ int main(int argc, char *argv[]) {
 );
         return 1;
     }
+
+    char *buf = argv[3];
+    int input_len = strlen(argv[3]);
+    char *regex_string = argv[1];
+    char *subst = argv[2];
+    int subst_len = strlen(subst);
+    regex_t regex;
+    regmatch_t bags[MAXGR];
+    int re_errcode;
+    char errbuf[ERRBUF_LEN];
 
     if ((re_errcode = regcomp(&regex, regex_string, REG_EXTENDED)) == 0) {
         if (regexec(&regex, argv[3], MAXGR, bags, 0) == 0) {
@@ -49,6 +51,10 @@ int main(int argc, char *argv[]) {
                         } else {
                             putchar(subst[j]);
                         }
+
+                        if (j < subst_len - 1 && subst[j] == '\\' && subst[j+1] == '\\') {
+                            ++j; // skip second backslash
+                        }
                     }
 
                     i = bags[0].rm_eo - 1; // skip to last char in full match
@@ -56,7 +62,12 @@ int main(int argc, char *argv[]) {
                     putchar(buf[i]);
                 }
             }
+
+            putchar('\n');
         }
+    } else {
+        regerror(re_errcode, &regex, errbuf, ERRBUF_LEN);
+        fprintf(stderr, "%.*s\n", ERRBUF_LEN - 1, errbuf);
     }
 
     regfree(&regex);
