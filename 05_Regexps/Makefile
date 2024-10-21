@@ -23,6 +23,8 @@ test: esub
 	./esub "(([[:digit:]]+).*)([[:digit:]]+)" "<1=\1><2=\2><3=\3>" "`cat date.in`" > 3prog.out
 	cmp 3sed.out 3prog.out
 
+check: test
+
 all: esub
 
 clean:
