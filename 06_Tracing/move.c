@@ -54,12 +54,12 @@ int main(int argc, char* argv[]) {
         handle_err("munmap() on input file");
     }
 
-    if (unlink(infilename) != 0) {
-        handle_err("unlink() on input file");
-    }
-
     if (fclose(outfile) != 0) {
         handle_err("fclose() on output file");
+    }
+
+    if (unlink(infilename) != 0) {
+        handle_err("unlink() on input file");
     }
 
     return 0;
