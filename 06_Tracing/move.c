@@ -26,41 +26,47 @@ int main(int argc, char* argv[]) {
 
     struct stat statbuf;
     if (stat(infilename, &statbuf) == -1) {
-        handle_err("stat() on input file");
+        handle_err("stat() input file");
     }
     size_t infilesize = (size_t) statbuf.st_size;
 
     int infd;
     if ((infd = open(infilename, O_RDONLY)) == -1) {
-        handle_err("open() on input file");
+        handle_err("open() input file");
     }
 
-    char* infile_mapping = (char*) mmap(NULL, infilesize, PROT_READ, MAP_PRIVATE, infd, 0);
-    if (infile_mapping == NULL) {
-        handle_err("mmap() on input file");
+    char* buf = (char*) calloc(infilesize, sizeof(char));
+    if (buf == NULL) {
+        handle_err("calloc()");
+    }
+
+    if (read(infd, buf, infilesize) == -1) {
+        handle_err("read() from input file");
+    }
+
+    if (close(infd) != 0) {
+        handle_err("close() input file");
     }
 
     char* outfilename = argv[2];
-    FILE* outfile = fopen(outfilename, "wb");
-    if (outfile == NULL) {
-        handle_err("fopen() on output file");
+    int outfd;
+    if ((outfd = open(outfilename, O_CREAT | O_TRUNC | O_WRONLY, 00664)) == -1) {
+        handle_err("open() output file");
     }
 
-    if (fwrite(infile_mapping, sizeof(char), infilesize, outfile) != infilesize) {
-        handle_err("fwrite()");
+    if (write(outfd, buf, infilesize) == -1) {
+        handle_err("write() to output file");
     }
 
-    if (munmap(infile_mapping, infilesize) != 0) {
-        handle_err("munmap() on input file");
-    }
-
-    if (fclose(outfile) != 0) {
-        handle_err("fclose() on output file");
+    if (close(outfd) != 0) {
+        handle_err("close() output file");
     }
 
     if (unlink(infilename) != 0) {
-        handle_err("unlink() on input file");
+        handle_err("unlink() input file");
     }
+
+    free(buf);
 
     return 0;
 }
