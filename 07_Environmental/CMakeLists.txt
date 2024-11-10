@@ -1,5 +1,6 @@
+enable_testing()
 cmake_minimum_required(VERSION 3.20)
-project(rhasher)
+project(rhasher C)
 
 find_library(RHASH_LIBRARY
              NAMES rhash
@@ -35,3 +36,39 @@ else()
     message(STATUS "readline DISABLED")
     set(CMAKE_C_FLAGS "-Wall -g")
 endif()
+
+add_test(NAME GenerateInfile
+    COMMAND dd if=/dev/random of=file.in count=1
+)
+set_tests_properties(GenerateInfile PROPERTIES
+    FIXTURES_SETUP Infile
+)
+
+add_test(NAME Generate_md5
+    COMMAND bash -c "md5sum file.in | grep -Po '^\\S+' > file.md5"
+)
+set_tests_properties(Generate_md5 PROPERTIES
+    FIXTURES_SETUP md5
+    FIXTURES_REQUIRED Infile
+)
+
+add_test(NAME Generate_sha1
+    COMMAND bash -c "sha1sum file.in | grep -Po '^\\S+' > file.sha1"
+)
+set_tests_properties(Generate_sha1 PROPERTIES
+    FIXTURES_SETUP sha1
+    FIXTURES_REQUIRED Infile
+)
+
+function(rhasher_test hash_type arg1 arg2)
+    set(testname RHasher_${arg1})
+    add_test(NAME ${testname}
+        COMMAND bash -c "echo ${arg1} ${arg2} | ./rhasher | grep -Po '[^\\s>]+' > ${testname}.out && cmp file.${hash_type} ${testname}.out"
+    )
+    set_tests_properties(${testname} PROPERTIES
+        FAIL_REGULAR_EXPRESSION differ
+        FIXTURES_REQUIRED ${hash_type})
+endfunction()
+
+rhasher_test(md5 MD5 file.in File)
+rhasher_test(sha1 SHA1 file.in File)

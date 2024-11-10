@@ -4,6 +4,8 @@ Build with libreadline:
 Build with `getline()` instead (default):
 - `cmake -B build/ -S . -Dreadline=0 && cmake --build build/`
 Clean build directory:
-- `./clean.sh` (same as just `rm -rf build/`)
+- `./clean.sh`
 Clean built binaries:
 - `cmake --build build/ -t clean`
+Run tests:
+- `ctest` in build directory (only tests with `RHasher` in the name are relevant)
