@@ -63,7 +63,7 @@ set_tests_properties(Generate_sha1 PROPERTIES
 function(rhasher_test hash_type arg1 arg2)
     set(testname RHasher_${arg1})
     add_test(NAME ${testname}
-        COMMAND bash -c "echo ${arg1} ${arg2} | ./rhasher | grep -Po '[^\\s>]+' > ${testname}.out && cmp file.${hash_type} ${testname}.out"
+        COMMAND bash -c "echo ${arg1} ${arg2} | ./rhasher | grep -Po '[^\\s>]+' | tail -n 1 > ${testname}.out && cmp file.${hash_type} ${testname}.out"
     )
     set_tests_properties(${testname} PROPERTIES
         FAIL_REGULAR_EXPRESSION differ
