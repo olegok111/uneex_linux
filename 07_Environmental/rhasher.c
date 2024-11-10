@@ -11,7 +11,7 @@
 #endif
 
 int main(int argc, char* argv[]) {
-    int hash_algo;
+    int hash_algo, hash_output_mode;
     unsigned char digest[64];
     char output[130];
     int res;
@@ -34,24 +34,33 @@ int main(int argc, char* argv[]) {
         }
 #endif
         cmd_token = strtok(cmd, " ");
-        if (!strcasecmp(cmd_token, "md5")) {
+        if (cmd_token == NULL) {
+            free(cmd);
+            continue;
+        } else if (!strcasecmp(cmd_token, "md5")) {
             hash_algo = RHASH_MD5;
         } else if (!strcasecmp(cmd_token, "sha1")) {
             hash_algo = RHASH_SHA1;
         } else if (!strcasecmp(cmd_token, "tth")) {
             hash_algo = RHASH_TTH;
         } else {
-            fprintf(stderr, "Unsupported hash algo: %s\n", cmd_token);
+            fprintf(stderr, "Unsupported hash type: %s\n", cmd_token);
             free(cmd);
-            return 1;
+            continue;
+        }
+
+        if (isupper(cmd_token[0])) {
+            hash_output_mode = RHPR_HEX;
+        } else {
+            hash_output_mode = RHPR_BASE64;
         }
 
         cmd_token = strtok(NULL, " \n");
         if (cmd_token == NULL) {
-            puts("Invalid command");
+            fputs("Missing argument\n", stderr);
         } else {
             if (cmd_token[0] == '"') {
-                char* s = cmd_token;
+                char* s = cmd_token + 1;
                 res = rhash_msg(hash_algo, s, strlen(s), digest);
             } else {
                 char* filepath = cmd_token;
@@ -60,12 +69,11 @@ int main(int argc, char* argv[]) {
             if (res < 0) {
                 fprintf(stderr, "LibRHash error: %s: %s\n", cmd_token, strerror(errno));
                 free(cmd);
-                return 1;
+                continue;
             }
 
-            rhash_print_bytes(output, digest, rhash_get_digest_size(hash_algo),
-                (RHPR_HEX | RHPR_UPPERCASE));
-            printf("hash: %s\n", output);
+            rhash_print_bytes(output, digest, rhash_get_digest_size(hash_algo), hash_output_mode);
+            puts(output);
         }
 
         free(cmd);
