@@ -3,13 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "config.h"
+
 #define _(STRING) gettext(STRING)
 
 int main(int argc, char* argv[]) {
-//     setlocale (LC_ALL, "");
-// 	bindtextdomain (PACKAGE, LOCALE_PATH);
-// 	textdomain (PACKAGE);
     setlocale(LC_ALL, "");
+    bindtextdomain(PACKAGE, LOCALEDIR);
+    textdomain(PACKAGE);
 
     const unsigned maxnum = 100;
     const unsigned guess_cnt = 7; // ceil(log2(maxnum))
