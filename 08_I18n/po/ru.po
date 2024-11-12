@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  08_I18n\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-11 21:38+0300\n"
+"POT-Creation-Date: 2024-11-12 19:25+0300\n"
 "PO-Revision-Date: 2024-11-11 21:39+0300\n"
 "Last-Translator: nond <na@example.com>\n"
 "Language-Team: Russian <gnu@d07.ru>\n"
@@ -18,21 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: guess.c:15
+#. ceil(log2(maxnum))
+#: ../guess.c:17
 #, c-format
 msgid "Think of a number no less than 1 and no more than %u.\n"
 msgstr "Загадай число не меньше 1 и не больше %u.\n"
 
-#: guess.c:22
+#: ../guess.c:24
 #, c-format
-msgid "Is it more than %u?"
-msgstr "Оно больше, чем %u?"
+msgid "Is the number more than %u?"
+msgstr "Число больше %u?"
 
-#: guess.c:29
+#: ../guess.c:31
 msgid "y"
 msgstr "д"
 
-#: guess.c:38
+#: ../guess.c:40
 #, c-format
 msgid "The number must be %u\n"
 msgstr "Должно быть, число равно %u\n"

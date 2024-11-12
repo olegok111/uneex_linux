@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Guessing game with l10n], [0.01], [BUG-REPORT-ADDRESS])
+AC_INIT([guess], [0.01], [BUG-REPORT-ADDRESS])
 AM_INIT_AUTOMAKE([foreign])
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_REQUIRE_VERSION(0.21)

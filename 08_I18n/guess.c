@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     unsigned guess = maxnum / 2;
     unsigned delta = maxnum / 4;
     for (unsigned i = 0; i < guess_cnt; ++i) {
-        printf(_("Is it more than %u?"), guess);
+        printf(_("Is the number more than %u?"), guess);
         getline(&user_input, &user_input_len, stdin);
 
         if (delta == 0) {
