@@ -29,7 +29,6 @@ msgid "Is the number more than %u?"
 msgstr "Число больше %u?"
 
 #: ../guess.c:26
-#
 msgid "y\n"
 msgstr "д\n"
 
