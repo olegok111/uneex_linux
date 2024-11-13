@@ -10,9 +10,5 @@ ru/LC_MESSAGES/guess.mo: po/ru.po
 po/ru.po:	po/guess.pot
 	msgmerge -U $@ $<
 
-# po/messages.pot:	po/guess.pot guess.c
-# 	xgettext -k_ -c guess.c -o po/messages.new.pot
-# 	msgmerge -U po/guess.pot po/messages.new.pot
-
 po/guess.pot:	guess.c
 	cd po; intltool-update ru
