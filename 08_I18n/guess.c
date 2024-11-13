@@ -7,37 +7,30 @@
 
 #define _(STRING) gettext(STRING)
 
-int main(int argc, char* argv[]) {
+int main(void) {
     setlocale(LC_ALL, "");
     bindtextdomain(PACKAGE, LOCALEDIR);
     textdomain(PACKAGE);
 
     const unsigned maxnum = 100;
-    const unsigned guess_cnt = 7; // ceil(log2(maxnum))
     printf(_("Think of a number no less than 1 and no more than %u.\n"), maxnum);
 
     char* user_input = NULL;
     size_t user_input_len = 0;
-    unsigned guess = maxnum / 2;
-    unsigned delta = maxnum / 4;
-    for (unsigned i = 0; i < guess_cnt; ++i) {
-        printf(_("Is the number more than %u?"), guess);
+    unsigned l = 1;
+    unsigned r = maxnum;
+    while (l != r) {
+        printf(_("Is the number more than %u?"), (r + l) / 2);
         getline(&user_input, &user_input_len, stdin);
 
-        if (delta == 0) {
-            ++delta;
-        }
-
-        if (!strncmp(user_input, _("y"), 2)) {
-            guess += delta;
+        if (!strncmp(user_input, _("y\n"), 2)) {
+            l = (r + l) / 2 + 1;
         } else {
-            guess -= delta;
+            r = (r + l) / 2;
         }
-
-        delta /= 2;
     }
 
-    printf(_("The number must be %u\n"), guess);
+    printf(_("The number must be %u\n"), (r + l) / 2);
 
     return 0;
 }
