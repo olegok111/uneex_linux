@@ -1,0 +1,20 @@
+--- maze.c	2024-11-17 17:39:59.962517932 +0300
++++ maze1.c	2024-11-17 17:57:58.967573680 +0300
+@@ -8,8 +8,16 @@
+ static char wall, empty;
+ 
+ int main(int argc, char* argv[]) {
++    if (argc != 2) {
++        puts(
++"Usage: maze N\n" \
++"Generate maze sized NxN."
++);
++        return 1;
++    }
++
+     srand(time(NULL));
+-    N = 13;
++    N = strtoul(argv[1], NULL, 10) * 2 + 1;
+     wall = '#';
+     empty = '.';
+ 

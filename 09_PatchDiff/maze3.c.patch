@@ -1,0 +1,33 @@
+--- maze.c	2024-11-17 17:39:59.962517932 +0300
++++ maze3.c	2024-11-17 17:57:52.935586799 +0300
+@@ -1,6 +1,5 @@
+ #include <stdlib.h>
+ #include <stdio.h>
+-#include <time.h>
+ #include <string.h>
+ 
+ static char** maze;
+@@ -8,10 +7,19 @@
+ static char wall, empty;
+ 
+ int main(int argc, char* argv[]) {
+-    srand(time(NULL));
+-    N = 13;
+-    wall = '#';
+-    empty = '.';
++    if (argc != 4) {
++        puts(
++"Usage: maze SEED EW N\n" \
++"Generate maze sized NxN with characters E and W used as empty cell and wall\n" \
++" respectively. rand() is seeded using number SEED.");
++        return 1;
++    }
++
++    unsigned seed = strtoul(argv[1], NULL, 10);
++    srand(seed);
++    N = strtoul(argv[3], NULL, 10) * 2 + 1;
++    wall = argv[2][1];
++    empty = argv[2][0];
+ 
+     maze = (char**) malloc(N * sizeof(char*));
+     for (size_t i = 0; i < N; ++i) {
