@@ -13,3 +13,5 @@ run: maze maze1 maze2 maze3
 
 clean:
 	rm -f $(GENERATES)
+
+all: run
