@@ -2,3 +2,5 @@
 */*.out
 */build/*
 */Testing/*
+!08_*/*.in
+!10_*/*.in
