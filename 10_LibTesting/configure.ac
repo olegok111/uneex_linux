@@ -17,6 +17,11 @@ PKG_CHECK_MODULES([CHECK],[check])
 # Variable definitins
 AC_SUBST(CK_VERBOSITY, verbose)
 AC_ARG_VAR(CK_VERBOSITY, [Default: "verbose", can be "silent", "minimal" or "normal")])
+# Enable/disable things
+AC_ARG_ENABLE([gcov],
+              [AS_HELP_STRING([--enable-gcov], [use Gcov to test the test suite])],
+              [], [enable_gcov=no])
+AM_CONDITIONAL([COND_GCOV],[test '!' "$enable_gcov" = no])
 
 # Checks for libraries.
 
