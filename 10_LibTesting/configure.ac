@@ -1,11 +1,11 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.72])
+AC_PREREQ([2.69])
 AC_INIT([Libtoolized growable buffer library], [0.0.1], [na@example.com])
 AM_INIT_AUTOMAKE([foreign])
 LT_INIT([disable-static])
-AC_CONFIG_SRCDIR([src/grobuf_const.h])
+AC_CONFIG_SRCDIR([src/grobuf.h])
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.

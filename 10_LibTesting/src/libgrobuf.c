@@ -27,7 +27,6 @@
 #include <stdlib.h>
 
 #include "grobuf.h"
-#include "grobuf_const.h"
 
 void *
 buf_grow1(void *v, size_t esize, ptrdiff_t n)

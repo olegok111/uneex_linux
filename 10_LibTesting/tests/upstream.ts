@@ -21,17 +21,6 @@ long *ai = 0;
 #  define C_GREEN(s)   "\033[32;1m" s "\033[0m"
 #endif
 
-#define TEST(s, x) \
-    do { \
-        if (x) { \
-            printf(C_GREEN("PASS") " %s\n", s); \
-            count_pass++; \
-        } else { \
-            printf(C_RED("FAIL") " %s\n", s); \
-            count_fail++; \
-        } \
-    } while (0)
-
 static uint32_t
 pcg32(uint64_t *s)
 {
@@ -87,59 +76,56 @@ uepoch(void)
 }
 #endif
 
-// ./tests 558d2750ae0e0887
 #suite GrowableBuf
 #tcase Benchmark
 #test beachmark_test
     /* Benchtest? */
-    if (argc > 1) {
-        uint64_t rng = strtoull(argv[1], 0, 16);
-        unsigned long r = 0;
-        uint64_t start = uepoch();
-        for (int i = 0; i < 300; i++)
-            r += bench(&rng);
-        double t = (uepoch() - start) / 1e6;
-        printf("%.6gs : actual %lu, expect 428859598\n", t, r);
-        ck_assert_int_eq(1, 1);
-    }
+    uint64_t rng = 0x558d2750ae0e0887;
+    unsigned long r = 0;
+    uint64_t start = uepoch();
+    for (int i = 0; i < 300; i++)
+        r += bench(&rng);
+    double t = (uepoch() - start) / 1e6;
+    printf("%.6gs : actual %lu, expect 428859598\n", t, r);
+    ck_assert_double_eq_tol(r, 428859598, 0.1);
 
 #tcase BufFree
 #test buf_free_test
     /* initialization, buf_free() */
-    TEST("capacity init", buf_capacity(a) == 0);
-    TEST("size init", buf_size(a) == 0);
+    ck_assert_int_eq(buf_capacity(a), 0); // capacity init
+    ck_assert_int_eq(buf_size(a), 0); // size init
     buf_push(a, 1.3f);
-    TEST("size 1", buf_size(a) == 1);
-    TEST("value", a[0] == (float)1.3f);
+    ck_assert_int_eq(buf_size(a), 1); // size 1
+    ck_assert_float_eq(a[0], (float)1.3f); // value
     buf_clear(a);
-    TEST("clear", buf_size(a) == 0);
-    TEST("clear not-free", a != 0);
+    ck_assert_int_eq(buf_size(a), 0); // clear
+    ck_assert_int_ne(a, 0); // clear not-free
     buf_free(a);
-    TEST("free", a == 0);
+    ck_assert_int_eq(a, 0); // free
 
     /* Clearing an NULL pointer is a no-op */
     buf_clear(a);
-    TEST("clear empty", buf_size(a) == 0);
-    TEST("clear no-op", a == 0);
+    ck_assert_int_eq(buf_size(a), 0); // clear empty
+    ck_assert_int_eq(a, 0); // clear no-op
 
 #tcase BufOps
 #test buf_ops_test
     /* buf_push(), [] operator */
     for (int i = 0; i < 10000; i++)
         buf_push(ai, i);
-    TEST("size 10000", buf_size(ai) == 10000);
+    ck_assert_int_eq(buf_size(ai), 10000); // size 10000
     int match = 0;
     for (int i = 0; i < (int)(buf_size(ai)); i++)
         match += ai[i] == i;
-    TEST("match 10000", match == 10000);
+    ck_assert_int_eq(match, 10000); // match 10000
     buf_free(ai);
 
     /* buf_grow(), buf_trunc() */
     buf_grow(ai, 1000);
-    TEST("grow 1000", buf_capacity(ai) == 1000);
-    TEST("size 0 (grow)", buf_size(ai) == 0);
+    ck_assert_int_eq(buf_capacity(ai), 1000); // grow 1000
+    ck_assert_int_eq(buf_size(ai), 0); // size 0 (grow)
     buf_trunc(ai, 100);
-    TEST("trunc 100", buf_capacity(ai) == 100);
+    ck_assert_int_eq(buf_capacity(ai), 100); // trunc 100
     buf_free(ai);
 
 #tcase BufPop
@@ -149,12 +135,12 @@ uepoch(void)
     buf_push(a, 1.2);
     buf_push(a, 1.3);
     buf_push(a, 1.4);
-    TEST("size 4", buf_size(a) == 4);
-    TEST("pop 3", buf_pop(a) == (float)1.4f);
+    ck_assert_int_eq(buf_size(a), 4); // size 4
+    ck_assert_float_eq(buf_pop(a), (float)1.4f); // pop 3
     buf_trunc(a, 3);
-    TEST("size 3", buf_size(a) == 3);
-    TEST("pop 2", buf_pop(a) == (float)1.3f);
-    TEST("pop 1", buf_pop(a) == (float)1.2f);
-    TEST("pop 0", buf_pop(a) == (float)1.1f);
-    TEST("size 0 (pop)", buf_size(a) == 0);
+    ck_assert_int_eq(buf_size(a), 3); // size 3
+    ck_assert_float_eq(buf_pop(a), (float)1.3f); // pop 2
+    ck_assert_float_eq(buf_pop(a), (float)1.2f); // pop 1
+    ck_assert_float_eq(buf_pop(a), (float)1.1f); // pop 0
+    ck_assert_int_eq(buf_size(a), 0); // size 0 (pop)
     buf_free(a);
