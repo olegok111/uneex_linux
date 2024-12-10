@@ -8,6 +8,7 @@ pkgdata_DATA=ru/LC_MESSAGES/guess.mo
 all-local: doxygen-doc
 
 doxygen-doc/man/man1/guess.1: doxygen-doc
+	help2man -N ./guess > $@
 
 man1_MANS=doxygen-doc/man/man1/guess.1
 
@@ -22,10 +23,10 @@ ru/LC_MESSAGES/guess.mo: po/ru.po
 	mkdir --parents `dirname $@`
 	msgfmt $< -o $@
 
-po/ru.po:	po/guess.pot
+po/ru.po:	po/Numberguessinggame.pot
 	msgmerge -U $@ $<
 
-po/guess.pot:	guess.c
+po/Numberguessinggame.pot:	guess.c
 	cd po; intltool-update ru
 
 guess.c: roman_table.h

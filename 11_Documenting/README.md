@@ -2,10 +2,10 @@
 Сборка (перевод предоставлен локально):
 - `autoreconf -fisv && ./configure --localedir=$PWD && make`
 
-Запуск:
-- `./guess` или `LANG=ru_RU.utf8 ./guess` на русском языке
+Запуск http-сервера с doxygen (после сборки):
+- `make http`
 
-Обновление перевода:
-- `make -C po update-po`, затем `make` после исправления перевода (т.е. удаления fuzzy).
+Просмотр man-страницы (после сборки):
+- `man ./doxygen-doc/man/man1/guess.1`
 
-Сделано на основе [примера с gettext](https://git.sr.ht/~frbrgeorge/simple-gettext/tree/master)
+Поддерживается запуск игры с римскими цифрами (`./guess -r`) и/или на русском языке (`LANG=ru_RU.utf8 ./guess ...`).

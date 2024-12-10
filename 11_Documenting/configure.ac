@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([guess], [0.01], [BUG-REPORT-ADDRESS], [guess])
+AC_INIT([Number guessing game], [0.2], [BUG-REPORT-ADDRESS], [guess])
 AM_INIT_AUTOMAKE([foreign])
 DX_INIT_DOXYGEN([guess])
 AM_GNU_GETTEXT([external])
@@ -22,7 +22,7 @@ AC_SUBST(MAXNUM, 100)
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([libintl.h])
+AC_CHECK_HEADERS([libintl.h argp.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T
