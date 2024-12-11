@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  08_I18n\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-11 02:01+0300\n"
+"POT-Creation-Date: 2024-12-11 15:30+0300\n"
 "PO-Revision-Date: 2024-11-11 21:39+0300\n"
 "Last-Translator: nond <na@example.com>\n"
 "Language-Team: Russian <gnu@d07.ru>\n"
@@ -18,36 +18,44 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../guess.c:112
+#: ../guess.c:70
+msgid "A game where the computer guesses the number picked by the player."
+msgstr "Игра, где компьютер угадывает число, загаданное игроком."
+
+#: ../guess.c:74
+msgid "Use roman numerals"
+msgstr "Использовать римские цифры"
+
+#: ../guess.c:141
 #, c-format
 msgid "Think of a number no less than I and no more than %.*s.\n"
 msgstr "Загадай число не меньше I и не больше %.*s.\n"
 
-#: ../guess.c:117
+#: ../guess.c:146
 #, c-format
 msgid "Think of a number no less than 1 and no more than %u.\n"
 msgstr "Загадай число не меньше 1 и не больше %u.\n"
 
-#: ../guess.c:128
+#: ../guess.c:157
 #, c-format
 msgid "Is the number more than %.*s?"
 msgstr "Число больше %.*s?"
 
-#: ../guess.c:133
+#: ../guess.c:162
 #, c-format
 msgid "Is the number more than %u?"
 msgstr "Число больше %u?"
 
-#: ../guess.c:138
+#: ../guess.c:167
 msgid "y\n"
 msgstr "д\n"
 
-#: ../guess.c:146
+#: ../guess.c:175
 #, c-format
 msgid "The number must be %.*s\n"
 msgstr "Должно быть, число равно %.*s\n"
 
-#: ../guess.c:151
+#: ../guess.c:180
 #, c-format
 msgid "The number must be %u\n"
 msgstr "Должно быть, число равно %u\n"

@@ -9,9 +9,38 @@
 #include "roman_table.h"
 
 #define _(STRING) gettext(STRING)
+#define N_(STRING) (STRING)
 
 /** @mainpage Number guessing game
  * @copydetails guessing-game-desc
+ *
+ * Help (EN):
+ * ```
+ * Usage: guess [OPTION...]
+ * A game where the computer guesses the number picked by the player.
+ *
+ * -r, --roman                Use roman numerals
+ * -?, --help                 Give this help list
+ *     --usage                Give a short usage message
+ * -V, --version              Print program version
+ *
+ * Report bugs to BUG-REPORT-ADDRESS.
+ * ```
+ *
+ * Help (RU):
+ * ```
+ * Usage: guess [OPTION...]
+ * Игра, где компьютер угадывает число,
+ * загаданное игроком.
+ *
+ *   -r, --roman                Использовать римские
+ *                              цифры
+ *   -?, --help                 Give this help list
+ *       --usage                Give a short usage message
+ *   -V, --version              Print program version
+ *
+ * Report bugs to BUG-REPORT-ADDRESS.
+ * ```
  */
 
 /** @page guessing-game-desc
@@ -38,11 +67,11 @@ const char *argp_program_bug_address =
 
 /// Program documentation.
 static char doc[] =
-    "A game where the computer guesses the number picked by the player.";
+    N_("A game where the computer guesses the number picked by the player.");
 
 /// Command line options.
 static struct argp_option options[] = {
-    {"roman", 'r', 0, 0, "Use roman numerals"},
+    {"roman", 'r', 0, 0, N_("Use roman numerals")},
     { 0 }
 };
 
@@ -148,7 +177,7 @@ int main(int argc, char* argv[]) {
             to_roman((r + l) / 2)
         );
     } else {
-        printf(_("The number must be %u\n"), to_roman((r + l) / 2));
+        printf(_("The number must be %u\n"), (r + l) / 2);
     }
 
     return 0;
