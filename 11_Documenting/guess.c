@@ -29,18 +29,19 @@
  *
  * Help (RU):
  * ```
- * Usage: guess [OPTION...]
+ * Использование: guess [ПАРАМЕТР...]
  * Игра, где компьютер угадывает число,
  * загаданное игроком.
- *
+ * 
  *   -r, --roman                Использовать римские
  *                              цифры
- *   -?, --help                 Give this help list
- *       --usage                Give a short usage message
- *   -V, --version              Print program version
- *
- * Report bugs to BUG-REPORT-ADDRESS.
- * ```
+ *   -?, --help                 Показать эту справку
+ *       --usage                Показать короткую справку
+ *                              по использованию
+ *   -V, --version              Показать номер версии
+ *                              программы
+ * 
+ * Об ошибках сообщать по адресу BUG-REPORT-ADDRESS.
  */
 
 /** @page guessing-game-desc
@@ -59,6 +60,17 @@
  * Guessing game's main logic.
  * 
  */
+
+#define OPT_USAGE -1
+
+// A bunch of seemingly unused strings wrapped in N_().
+// This is a hack to make sure xgettext picks up default help strings.
+const char _help_option[] = N_("Give this help list");
+const char _usage_option[] = N_("Give a short usage message");
+const char _ver_option[] = N_("Print program version");
+const char _usage0[] = N_("Usage:");
+const char _usage1[] = N_(" [OPTION...]");
+const char _bug_report[] = N_("Report bugs to %s.\n");
 
 const char *argp_program_version =
   PACKAGE_STRING;
