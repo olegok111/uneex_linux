@@ -1,0 +1,88 @@
+# Russian translations for  08_I18n package.
+# Copyright (C) 2024 THE  08_I18n'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the  08_I18n package.
+# nond <na@example.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version:  08_I18n\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-16 02:19+0300\n"
+"PO-Revision-Date: 2024-11-11 21:39+0300\n"
+"Last-Translator: nond <na@example.com>\n"
+"Language-Team: Russian <gnu@d07.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. A bunch of seemingly unused strings wrapped in N_().
+#. This is a hack to make sure xgettext picks up default help strings.
+#: ../src/guess.c:36
+msgid "Give this help list"
+msgstr "Показать эту справку"
+
+#: ../src/guess.c:37
+msgid "Give a short usage message"
+msgstr "Показать короткую справку по использованию"
+
+#: ../src/guess.c:38
+msgid "Print program version"
+msgstr "Показать номер версии программы"
+
+#: ../src/guess.c:39
+msgid "Usage:"
+msgstr "Использование:"
+
+#: ../src/guess.c:40
+msgid " [OPTION...]"
+msgstr " [ПАРАМЕТР...]"
+
+#: ../src/guess.c:41
+#, c-format
+msgid "Report bugs to %s.\n"
+msgstr "Об ошибках сообщать по адресу %s.\n"
+
+#: ../src/guess.c:50
+msgid "A game where the computer guesses the number picked by the player."
+msgstr "Игра, где компьютер угадывает число, загаданное игроком."
+
+#: ../src/guess.c:54
+msgid "Use roman numerals"
+msgstr "Использовать римские цифры"
+
+#: ../src/guess.c:101
+#, c-format
+msgid "Think of a number no less than I and no more than %.*s.\n"
+msgstr "Загадай число не меньше I и не больше %.*s.\n"
+
+#: ../src/guess.c:106
+#, c-format
+msgid "Think of a number no less than 1 and no more than %u.\n"
+msgstr "Загадай число не меньше 1 и не больше %u.\n"
+
+#: ../src/guess.c:117
+#, c-format
+msgid "Is the number more than %.*s?"
+msgstr "Число больше %.*s?"
+
+#: ../src/guess.c:122
+#, c-format
+msgid "Is the number more than %u?"
+msgstr "Число больше %u?"
+
+#: ../src/guess.c:127
+msgid "y\n"
+msgstr "д\n"
+
+#: ../src/guess.c:135
+#, c-format
+msgid "The number must be %.*s\n"
+msgstr "Должно быть, число равно %.*s\n"
+
+#: ../src/guess.c:140
+#, c-format
+msgid "The number must be %u\n"
+msgstr "Должно быть, число равно %u\n"

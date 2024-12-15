@@ -16,9 +16,6 @@ def print_header_file():
 /** @file roman_table.h
  * Header file for roman numeral support in the guessing game.
  */
-
-#ifndef ROMAN_TABLE_H
-#define ROMAN_TABLE_H
 """)
 
     table = []
@@ -43,9 +40,7 @@ def print_header_file():
 
     print(f"""
 /// Length of the longest roman numeral present.
-#define MAX_ROMAN_LEN {maxlen}
-
-#endif // ROMAN_TABLE_H""")
+#define MAX_ROMAN_LEN {maxlen}""")
 
 
 if __name__ == '__main__':
