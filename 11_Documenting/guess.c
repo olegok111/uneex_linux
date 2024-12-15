@@ -11,39 +11,6 @@
 #define _(STRING) gettext(STRING)
 #define N_(STRING) (STRING)
 
-/** @mainpage Number guessing game
- * @copydetails guessing-game-desc
- *
- * Help (EN):
- * ```
- * Usage: guess [OPTION...]
- * A game where the computer guesses the number picked by the player.
- *
- * -r, --roman                Use roman numerals
- * -?, --help                 Give this help list
- *     --usage                Give a short usage message
- * -V, --version              Print program version
- *
- * Report bugs to BUG-REPORT-ADDRESS.
- * ```
- *
- * Help (RU):
- * ```
- * Использование: guess [ПАРАМЕТР...]
- * Игра, где компьютер угадывает число,
- * загаданное игроком.
- * 
- *   -r, --roman                Использовать римские
- *                              цифры
- *   -?, --help                 Показать эту справку
- *       --usage                Показать короткую справку
- *                              по использованию
- *   -V, --version              Показать номер версии
- *                              программы
- * 
- * Об ошибках сообщать по адресу BUG-REPORT-ADDRESS.
- */
-
 /** @page guessing-game-desc
  * 
  * In this game a player picks a number and the computer guesses it.
