@@ -9,6 +9,7 @@ AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_REQUIRE_VERSION(0.21)
 AC_CONFIG_SRCDIR([src/guess.c])
 AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIRS([m4])
 AC_SUBST(GETTEXT_PACKAGE, "$PACKAGE")
 ALL_LINGUAS="ru"
 LT_INIT([disable-static])
@@ -21,11 +22,14 @@ AC_PROG_CC
 IT_PROG_INTLTOOL
 
 # Variable definitions
-AC_SUBST(MAXNUM, 100)
+AC_SUBST(MAXNUM, 100)  # TODO: make this configurable via command line
 AC_SUBST(CK_VERBOSITY, verbose)
 AC_ARG_VAR(CK_VERBOSITY, [Default: "verbose", can be "silent", "minimal" or "normal")])
 
 # Checks for libraries.
+AC_SEARCH_LIBS([argp_parse], [argp], [], [
+  AC_MSG_ERROR([argp_parse() not found])
+])
 
 # Checks for header files.
 AC_CHECK_HEADERS([libintl.h argp.h])

@@ -1,5 +1,6 @@
 SUBDIRS=po src tests
 pkgdata_DATA=ru/LC_MESSAGES/guess.mo
+ACLOCAL_AMFLAGS=-I m4
 
 @DX_RULES@
 
