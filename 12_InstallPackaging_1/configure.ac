@@ -13,6 +13,7 @@ AC_CONFIG_MACRO_DIRS([m4])
 AC_SUBST(GETTEXT_PACKAGE, "$PACKAGE")
 ALL_LINGUAS="ru"
 LT_INIT([disable-static])
+PC_INIT([3.0])
 
 # Joint pkgconfig library/include tests
 PKG_CHECK_MODULES([CHECK],[check])
@@ -38,6 +39,9 @@ AC_ARG_VAR(CK_VERBOSITY, [Default: "verbose", can be "silent", "minimal" or "nor
 AC_SEARCH_LIBS([argp_parse], [argp], [], [
   AC_MSG_ERROR([argp_parse() not found])
 ])
+
+# Checks for python modules.
+PC_PYTHON_CHECK_PACKAGE([roman])
 
 # Checks for header files.
 AC_CHECK_HEADERS([libintl.h argp.h])
