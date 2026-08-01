@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Number guessing game],[0.4],[BUG-REPORT-ADDRESS],[guess])
+AC_INIT([Number guessing game],[0.4.1],[BUG-REPORT-ADDRESS],[guess])
 AM_INIT_AUTOMAKE([foreign])
 DX_INIT_DOXYGEN([guess])
 AM_GNU_GETTEXT([external])
@@ -38,6 +38,9 @@ AC_ARG_VAR(CK_VERBOSITY, [Default: "verbose", can be "silent", "minimal" or "nor
 AC_SEARCH_LIBS([argp_parse], [argp], [], [
   AC_MSG_ERROR([argp_parse() not found])
 ])
+
+# Checks for python modules.
+AX_PYTHON_MODULE([roman], [1])
 
 # Checks for header files.
 AC_CHECK_HEADERS([libintl.h argp.h])
