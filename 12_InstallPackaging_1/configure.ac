@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([Number guessing game],[0.4],[BUG-REPORT-ADDRESS],[guess])
+AC_INIT([Number guessing game],[0.4.1],[BUG-REPORT-ADDRESS],[guess])
 AM_INIT_AUTOMAKE([foreign])
 DX_INIT_DOXYGEN([guess])
 AM_GNU_GETTEXT([external])
@@ -13,7 +13,6 @@ AC_CONFIG_MACRO_DIRS([m4])
 AC_SUBST(GETTEXT_PACKAGE, "$PACKAGE")
 ALL_LINGUAS="ru"
 LT_INIT([disable-static])
-PC_INIT([3.0])
 
 # Joint pkgconfig library/include tests
 PKG_CHECK_MODULES([CHECK],[check])
@@ -41,7 +40,7 @@ AC_SEARCH_LIBS([argp_parse], [argp], [], [
 ])
 
 # Checks for python modules.
-PC_PYTHON_CHECK_PACKAGE([roman])
+AX_PYTHON_MODULE([roman], [1])
 
 # Checks for header files.
 AC_CHECK_HEADERS([libintl.h argp.h])
