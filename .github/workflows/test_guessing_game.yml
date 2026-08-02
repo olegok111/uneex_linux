@@ -1,0 +1,31 @@
+on:
+  push:
+    paths:
+      - 12_InstallPackaging_1/
+
+jobs:
+  task12_1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install packages
+        run: apt install autoconf autoconf-archive automake intltool help2man python-roman doxygen libtool check
+
+      - name: autoreconf
+        working-directory: 12_InstallPackaging_1
+        run: autoreconf -fis
+
+      - name: configure
+        working-directory: 12_InstallPackaging_1
+        run: ./configure
+
+      - name: make
+        working-directory: 12_InstallPackaging_1
+        run: make
+
+      - name: Run game
+        working-directory: 12_InstallPackaging_1
+        run: echo -e 'n\ny\nn\ny\ny\nn\ny' | src/guess | grep 'The number must be 37'
