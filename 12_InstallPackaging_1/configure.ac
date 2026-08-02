@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.68])
 AC_INIT([Number guessing game],[0.4.1],[BUG-REPORT-ADDRESS],[guess])
 AM_INIT_AUTOMAKE([foreign])
 DX_INIT_DOXYGEN([guess])
