@@ -40,7 +40,7 @@ AC_SEARCH_LIBS([argp_parse], [argp], [], [
 ])
 
 # Checks for python modules.
-AX_PYTHON_MODULE([roman], [1])
+AX_PYTHON_MODULE([roman], [], [python3])
 
 # Checks for header files.
 AC_CHECK_HEADERS([libintl.h argp.h])
