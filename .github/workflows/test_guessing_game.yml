@@ -5,7 +5,7 @@ on:
     branches: ["main"]
     paths:
       - 12_InstallPackaging_1/**
-      - .github/actions/**
+      - .github/workflows/**
 
 jobs:
   task12_1:
