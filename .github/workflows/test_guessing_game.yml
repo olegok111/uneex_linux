@@ -16,7 +16,8 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install packages
-        run: sudo apt install autoconf autoconf-archive automake intltool help2man python3-roman doxygen libtool check -y
+        run: |
+          sudo apt install autoconf-archive autopoint intltool help2man python3-roman doxygen check -y
 
       - name: autoreconf
         working-directory: 12_InstallPackaging_1
