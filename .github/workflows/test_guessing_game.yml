@@ -1,7 +1,8 @@
 on:
   push:
+    branches: ["main"]
     paths:
-      - 12_InstallPackaging_1/
+      - 12_InstallPackaging_1/**
 
 jobs:
   task12_1:
